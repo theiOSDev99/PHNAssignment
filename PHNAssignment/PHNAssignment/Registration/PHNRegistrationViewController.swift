@@ -83,10 +83,7 @@ class PHNRegistrationViewController: UITableViewController {
     }
     
     private func navigateToLogin() {
-        let sb = UIStoryboard(name: "Main", bundle: nil)
-        let homeTabVC = sb.instantiateViewController(withIdentifier: "PHNLogInViewController" ) //Best practie is to use string for constants
-        UIApplication.shared.keyWindow?.rootViewController = homeTabVC
-        UIApplication.shared.keyWindow?.makeKeyAndVisible()
+        self.navigationController?.popViewController(animated: true)
     }
     
     private func saveCredentialsInKeychain() {
@@ -103,7 +100,7 @@ class PHNRegistrationViewController: UITableViewController {
             newUserList.append(newUser)
         }
     
-        let encodedData = NSKeyedArchiver.archivedData(withRootObject: [newUserList])
+        let encodedData = NSKeyedArchiver.archivedData(withRootObject: newUserList)
         PHNKeyChain.shared.save(key: "Users", data: encodedData)
     }
     
